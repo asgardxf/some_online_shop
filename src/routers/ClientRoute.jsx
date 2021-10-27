@@ -24,7 +24,7 @@ const PrivateRoute = ({
       if (isAuth && role === 'ADMIN') {
         return <Redirect to={ADMIN_DASHBOARD} />;
       }
-
+console.log('wadafuck', isAuth, role, 123)
       return (
         <Redirect to={{
           pathname: SIGNIN,

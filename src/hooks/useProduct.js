@@ -19,8 +19,8 @@ const useProduct = (id) => {
           setLoading(true);
           const doc = await firebase.getSingleProduct(id);
 
-          if (doc.exists) {
-            const data = { ...doc.data(), id: doc.ref.id };
+          if (doc) {
+            const data = doc; // { ...doc.data(), id: doc.ref.id };
 
             if (didMount) {
               setProduct(data);

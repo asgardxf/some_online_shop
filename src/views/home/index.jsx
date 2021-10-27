@@ -5,13 +5,12 @@ import { FEATURED_PRODUCTS, RECOMMENDED_PRODUCTS, SHOP } from 'constants/routes'
 import {
   useDocumentTitle, useFeaturedProducts, useRecommendedProducts, useScrollTop
 } from 'hooks';
-import bannerImg from 'images/banner-girl.png';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 
 const Home = () => {
-  useDocumentTitle('Salinaka | Home');
+  //useDocumentTitle('Salinaka | Home');
   useScrollTop();
 
   const {
@@ -33,26 +32,25 @@ const Home = () => {
         <div className="banner">
           <div className="banner-desc">
             <h1 className="text-thin">
-              <strong>See</strong>
-              &nbsp;everything with&nbsp;
-              <strong>Clarity</strong>
+              <strong>Тут</strong>
+              &nbsp;будет&nbsp;
+              <strong>текст</strong>
             </h1>
             <p>
-              Buying eyewear should leave you happy and good-looking, with money in your pocket.
-              Glasses, sunglasses, and contacts—we’ve got your eyes covered.
+              Описание магазина
             </p>
             <br />
-            <Link to={SHOP} className="button">
-              Shop Now &nbsp;
+            {/*<Link to={SHOP} className="button">
+              К товарам &nbsp;
               <ArrowRightOutlined />
-            </Link>
+            </Link>*/}
           </div>
-          <div className="banner-img"><img src={bannerImg} alt="" /></div>
+          <div className="banner-img"><img src="https://sun9-4.userapi.com/impg/c856032/v856032854/18081d/URjF9LnAhLM.jpg?size=576x768&quality=96&sign=04c3fef13b8804d9a3bd4d35d201ee10&type=album" alt="" /></div>
         </div>
         <div className="display">
           <div className="display-header">
-            <h1>Featured Products</h1>
-            <Link to={FEATURED_PRODUCTS}>See All</Link>
+            <h1>Квесты</h1>
+            {/*<Link to={FEATURED_PRODUCTS}>See All</Link>*/}
           </div>
           {(errorFeatured && !isLoadingFeatured) ? (
             <MessageDisplay
@@ -67,24 +65,24 @@ const Home = () => {
             />
           )}
         </div>
-        <div className="display">
-          <div className="display-header">
-            <h1>Recommended Products</h1>
-            <Link to={RECOMMENDED_PRODUCTS}>See All</Link>
-          </div>
-          {(errorRecommended && !isLoadingRecommended) ? (
-            <MessageDisplay
-              message={errorRecommended}
-              action={fetchRecommendedProducts}
-              buttonLabel="Try Again"
-            />
-          ) : (
-            <ProductShowcaseGrid
-              products={recommendedProducts}
-              skeletonCount={6}
-            />
-          )}
-        </div>
+        {/*<div className="display">*/}
+          {/*<div className="display-header">*/}
+            {/*<h1>Recommended Products</h1>*/}
+            {/*<Link to={RECOMMENDED_PRODUCTS}>See All</Link>*/}
+          {/*</div>*/}
+          {/*{(errorRecommended && !isLoadingRecommended) ? (*/}
+            {/*<MessageDisplay*/}
+              {/*message={errorRecommended}*/}
+              {/*action={fetchRecommendedProducts}*/}
+              {/*buttonLabel="Try Again"*/}
+            {/*/>*/}
+          {/*) : (*/}
+            {/*<ProductShowcaseGrid*/}
+              {/*products={recommendedProducts}*/}
+              {/*skeletonCount={6}*/}
+            {/*/>*/}
+          {/*)}*/}
+        {/*</div>*/}
       </div>
     </main>
   );

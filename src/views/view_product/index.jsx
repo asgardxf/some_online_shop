@@ -19,7 +19,7 @@ const ViewProduct = () => {
   const { product, isLoading, error } = useProduct(id);
   const { addToBasket, isItemOnBasket } = useBasket(id);
   useScrollTop();
-  useDocumentTitle(`View ${product?.name || 'Item'}`);
+  useDocumentTitle(`${product?.name || 'Item'}`);
 
   const [selectedImage, setSelectedImage] = useState(product?.image || '');
   const [selectedSize, setSelectedSize] = useState('');
@@ -66,12 +66,12 @@ const ViewProduct = () => {
       )}
       {(product && !isLoading) && (
         <div className="product-view">
-          <Link to={SHOP}>
+          {/*<Link to={SHOP}>
             <h3 className="button-link d-inline-flex">
               <ArrowLeftOutlined />
               &nbsp; Back to shop
             </h3>
-          </Link>
+          </Link>*/}
           <div className="product-modal">
             {product.imageCollection.length !== 0 && (
               <div className="product-modal-image-collection">
@@ -107,7 +107,7 @@ const ViewProduct = () => {
               <br />
               <div className="divider" />
               <br />
-              <div>
+              {/*<div>
                 <span className="text-subtle">Lens Width and Frame Size</span>
                 <br />
                 <br />
@@ -117,7 +117,7 @@ const ViewProduct = () => {
                   options={product.sizes.sort((a, b) => (a < b ? -1 : 1)).map((size) => ({ label: `${size} mm`, value: size }))}
                   styles={{ menu: (provided) => ({ ...provided, zIndex: 10 }) }}
                 />
-              </div>
+              </div>*/}
               <br />
               {product.availableColors.length >= 1 && (
                 <div>
@@ -130,19 +130,19 @@ const ViewProduct = () => {
                   />
                 </div>
               )}
-              <h1>{displayMoney(product.price)}</h1>
+              {/*<h1>{displayMoney(product.price)}</h1>*/}
               <div className="product-modal-action">
                 <button
                   className={`button button-small ${isItemOnBasket(product.id) ? 'button-border button-border-gray' : ''}`}
                   onClick={handleAddToBasket}
                   type="button"
                 >
-                  {isItemOnBasket(product.id) ? 'Remove From Basket' : 'Add To Basket'}
+                  {isItemOnBasket(product.id) ? 'Удалить из корзины' : 'Добавить в корзину'}
                 </button>
               </div>
             </div>
           </div>
-          <div style={{ marginTop: '10rem' }}>
+          {/*<div style={{ marginTop: '10rem' }}>
             <div className="display-header">
               <h1>Recommended</h1>
               <Link to={RECOMMENDED_PRODUCTS}>See All</Link>
@@ -156,7 +156,7 @@ const ViewProduct = () => {
             ) : (
               <ProductShowcaseGrid products={recommendedProducts} skeletonCount={3} />
             )}
-          </div>
+          </div>*/}
         </div>
       )}
     </main>

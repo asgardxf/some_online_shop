@@ -1,16 +1,58 @@
-import app from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
-import "firebase/storage";
-import firebaseConfig from "./config";
+
+function noop(data) {
+    console.log(data)
+}
+
+const createReturn = (params, result) => {
+    return {
+        data() {
+          return result
+        }
+    }
+};
+
+const apiHost = 'http://151.248.112.52:8000';
+function apiCall(path) {
+  return fetch(apiHost + path).then(res => res.json());
+}
+
+
+function getProducts() {
+  return apiCall('/quest/quest_list').then(data => data.map(mapItem))
+}
+
+function mapItem(item) {
+  return {
+    ...item,
+    id: String(item.id),
+    image: apiHost + item.photo,
+    imageCollection: [],
+    sizes: [],
+    availableColors: [],
+    price: 1,
+  }
+}
 
 class Firebase {
-  constructor() {
-    app.initializeApp(firebaseConfig);
-
-    this.storage = app.storage();
-    this.db = app.firestore();
-    this.auth = app.auth();
+  // constructor() {
+  //   app.initializeApp(firebaseConfig);
+  //
+  //   this.storage = app.storage();
+  //   this.db = app.firestore();
+  //   this.auth = app.auth();
+  // }
+  auth = {
+      onAuthStateChanged(cb) {
+        setTimeout(() => {
+          cb({
+                id: 'test-123',
+              uid: 'such-uid',
+                role: 'ADMIN',
+                provider: 'password',
+              providerData: [{}]
+          })
+        }, 1000)
+      }
   }
 
   // AUTH ACTIONS ------------
@@ -36,7 +78,17 @@ class Firebase {
 
   addUser = (id, user) => this.db.collection("users").doc(id).set(user);
 
-  getUser = (id) => this.db.collection("users").doc(id).get();
+  getUser = (id) => {
+    //  getUser = (id) => this.db.collection("users").doc(id).get();
+
+    return createReturn(id, {
+        id: 'test-123',
+        role: 'USER',
+        provider: 'password',
+        providerData: [],
+        basket: [],
+    })
+  };
 
   passwordUpdate = (password) => this.auth.currentUser.updatePassword(password);
 
@@ -102,9 +154,14 @@ class Firebase {
 
   // // PRODUCT ACTIONS --------------
 
-  getSingleProduct = (id) => this.db.collection("products").doc(id).get();
+  getSingleProduct = (id) => {
+    //this.db.collection("products").doc(id).get()
+      return getProducts().then(data => data.find(item => String(item.id) === id))
+  };
 
   getProducts = (lastRefKey) => {
+    return getProducts();
+
     let didTimeout = false;
 
     return new Promise((resolve, reject) => {
@@ -230,19 +287,25 @@ class Firebase {
     });
   };
 
-  getFeaturedProducts = (itemsCount = 12) =>
-    this.db
-      .collection("products")
-      .where("isFeatured", "==", true)
-      .limit(itemsCount)
-      .get();
+  getFeaturedProducts = (itemsCount = 12) => {
+      // this.db
+      //     .collection("products")
+      //     .where("isFeatured", "==", true)
+      //     .limit(itemsCount)
+      //     .get();
+    return getProducts();
+  }
 
-  getRecommendedProducts = (itemsCount = 12) =>
-    this.db
-      .collection("products")
-      .where("isRecommended", "==", true)
-      .limit(itemsCount)
-      .get();
+
+
+  getRecommendedProducts = (itemsCount = 12) => {
+      // this.db
+      //     .collection("products")
+      //     .where("isRecommended", "==", true)
+      //     .limit(itemsCount)
+      //     .get();
+      return []
+  }
 
   addProduct = (id, product) =>
     this.db.collection("products").doc(id).set(product);

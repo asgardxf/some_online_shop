@@ -21,12 +21,12 @@ const useRecommendedProducts = (itemsCount) => {
           setLoading(false);
         }
       } else {
-        const items = [];
+        const items = docs;
 
-        docs.forEach((snap) => {
-          const data = snap.data();
-          items.push({ id: snap.ref.id, ...data });
-        });
+        // docs.forEach((snap) => {
+        //   const data = snap.data();
+        //   items.push({ id: snap.ref.id, ...data });
+        // });
 
         if (didMount) {
           setRecommendedProducts(items);

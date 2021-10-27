@@ -7,8 +7,7 @@ const Footer = () => {
   const { pathname } = useLocation();
 
   const visibleOnlyPath = [
-    Route.HOME,
-    Route.SHOP
+
   ];
 
   return !visibleOnlyPath.includes(pathname) ? null : (

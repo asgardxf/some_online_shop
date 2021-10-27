@@ -39,7 +39,10 @@ const SignUp = ({ history }) => {
     dispatch(setAuthenticating(false));
   }, []);
 
-  const onClickSignIn = () => history.push(SIGNIN);
+  const onClickSignIn = () => {
+    console.log('history.push(SIGNIN)')
+    history.push(SIGNIN)
+  };
 
   const onFormSubmit = (form) => {
     dispatch(signUp({
