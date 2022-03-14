@@ -16,6 +16,7 @@ export const displayDate = (timestamp) => {
 };
 
 export const displayMoney = (n) => {
+  return n + ' Р.';
   const format = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD'
@@ -30,7 +31,10 @@ export const calculateTotal = (arr) => {
 
   const total = arr.reduce((acc, val) => acc + val, 0);
 
-  return total.toFixed(2);
+  if (total.toFixed) {
+    return total.toFixed(2);
+  }
+  return total;
 };
 
 export const displayActionMessage = (msg, status = 'info') => {

@@ -12,8 +12,6 @@ const ProductFeatured = ({ product }) => {
     history.push(`/product/${product.id}`);
   };
 
-
-  console.log(product)
   return (
     <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2">
       <div className="product-display" onClick={onClickItem} role="presentation">
@@ -28,7 +26,7 @@ const ProductFeatured = ({ product }) => {
         <div className="product-display-details">
           <h2>{product.name || <Skeleton width={80} />}</h2>
           <p className="text-subtle text-italic">
-            {product.brand || <Skeleton width={40} />}
+            {product.price || <Skeleton width={40} />}
           </p>
         </div>
       </div>

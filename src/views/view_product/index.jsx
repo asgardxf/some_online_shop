@@ -23,6 +23,8 @@ const ViewProduct = () => {
 
   const [selectedImage, setSelectedImage] = useState(product?.image || '');
   const [selectedSize, setSelectedSize] = useState('');
+  const [selectedTime, setSelectedTime] = useState('none');
+  const [selectedDate, setSelectedDate] = useState();
   const [selectedColor, setSelectedColor] = useState('');
 
   const {
@@ -49,6 +51,9 @@ const ViewProduct = () => {
   };
 
   const handleAddToBasket = () => {
+    if (selectedTime === 'none' || !selectedDate) {
+      return
+    }
     addToBasket({ ...product, selectedColor, selectedSize: selectedSize || product.sizes[0] });
   };
 
@@ -118,6 +123,36 @@ const ViewProduct = () => {
                   styles={{ menu: (provided) => ({ ...provided, zIndex: 10 }) }}
                 />
               </div>*/}
+              <div>
+                <span className="text-subtle">Выбор времени</span>
+                <br />
+                <br />
+                <select
+                  value={selectedTime}
+                  onChange={(e) => {
+                    console.log(e)
+                    setSelectedTime(e.target.value)
+                  }}
+                >
+                  <option value="none">Не выбрано</option>
+                  {product.timeslot_list.map(item => {
+                    return <option key={item} value={item}>{item}</option>
+                  })}
+                </select>
+              </div>
+              <div>
+                <br />
+                <span className="text-subtle">Выбор даты</span>
+                <br />
+                <br />
+                <input
+                  value={selectedDate}
+                  onChange={(e) => {
+                    setSelectedDate(e.target.value)
+                  }}
+                  type="date"
+                />
+              </div>
               <br />
               {product.availableColors.length >= 1 && (
                 <div>
@@ -130,7 +165,7 @@ const ViewProduct = () => {
                   />
                 </div>
               )}
-              {/*<h1>{displayMoney(product.price)}</h1>*/}
+              <h1>{displayMoney(product.price)}</h1>
               <div className="product-modal-action">
                 <button
                   className={`button button-small ${isItemOnBasket(product.id) ? 'button-border button-border-gray' : ''}`}

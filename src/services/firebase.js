@@ -29,7 +29,7 @@ function mapItem(item) {
     imageCollection: [],
     sizes: [],
     availableColors: [],
-    price: 1,
+    //price: 1,
   }
 }
 

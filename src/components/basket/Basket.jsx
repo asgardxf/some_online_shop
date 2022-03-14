@@ -130,7 +130,8 @@ const Basket = () => {
           <div className="basket-total">
             <p className="basket-total-title">Subtotal Amout:</p>
             <h2 className="basket-total-amount">
-              {displayMoney(calculateTotal(basket.map((product) => product.price * product.quantity)))}
+              {/*{displayMoney(calculateTotal(basket.map((product) => product.price * product.quantity)))}*/}
+              {displayMoney(calculateTotal(basket.map((product) => parseInt(product.price))))}
             </h2>
           </div>
           <button
