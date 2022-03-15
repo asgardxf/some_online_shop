@@ -10,7 +10,7 @@ const createReturn = (params, result) => {
         }
     }
 };
-
+const app = {}; //todo  
 const apiHost = 'http://151.248.113.224:8000';
 export function apiCall(path) {
   return fetch(apiHost + path).then(res => res.json());
