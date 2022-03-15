@@ -4,8 +4,22 @@ import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { clearRecentSearch, removeSelectedRecent } from 'redux/actions/filterActions';
+import { apiCall } from 'services/firebase';
+
+
+let city = [];
+apiCall('/quest/city_list').then(data => {
+  city = data;
+});
+
+let c = localStorage.getItem('city');
+if (!c) {
+    localStorage.setItem('city', '1');
+}
+
 
 const SearchBar = () => {
+  console.log(city)
   const [searchInput, setSearchInput] = useState('');
   const { filter, isLoading } = useSelector((state) => ({
     filter: state.filter,
@@ -64,6 +78,15 @@ const SearchBar = () => {
     dispatch(clearRecentSearch());
   };
 
+    return <div>
+      Ваш город:&nbsp;
+        <select defaultValue={c} onChange={event => {
+            localStorage.setItem('city', event.target.value);
+            document.location.reload();
+        }}>
+            {city.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
+        </select>
+    </div>
   return (
     <>
       <div className="searchbar" ref={searchbarRef}>

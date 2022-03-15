@@ -11,14 +11,17 @@ const createReturn = (params, result) => {
     }
 };
 
-const apiHost = 'http://151.248.112.52:8000';
-function apiCall(path) {
+const apiHost = 'http://151.248.113.224:8000';
+export function apiCall(path) {
   return fetch(apiHost + path).then(res => res.json());
 }
 
 
 function getProducts() {
-  return apiCall('/quest/quest_list').then(data => data.map(mapItem))
+  return apiCall('/quest/quest_list').then(data => data.map(mapItem).filter(item => {
+      console.log(item)
+      return String(item.city) === localStorage.getItem('city');
+  }));
 }
 
 function mapItem(item) {
