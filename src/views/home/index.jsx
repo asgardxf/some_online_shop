@@ -5,10 +5,34 @@ import { FEATURED_PRODUCTS, RECOMMENDED_PRODUCTS, SHOP } from 'constants/routes'
 import {
   useDocumentTitle, useFeaturedProducts, useRecommendedProducts, useScrollTop
 } from 'hooks';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
+const srcList = [
+  "https://sun9-81.userapi.com/impf/c841222/v841222361/42e29/SVuaH-X5oXI.jpg?size=1080x1080&quality=96&sign=850eff2c0cc6a3ac561932ddcf0ba4e2&type=album",
+  "https://sun9-61.userapi.com/impf/2rJ49OJST4uvjZ156c4S-s0Vdk0SPIbKDH23Vg/O-dcUdhhGtk.jpg?size=480x604&quality=96&sign=147c0c629e311bef571f4c1bc4512858&type=album",
+  "https://sun9-4.userapi.com/impg/c856032/v856032854/18081d/URjF9LnAhLM.jpg?size=576x768&quality=96&sign=04c3fef13b8804d9a3bd4d35d201ee10&type=album",
+  "https://sun7-9.userapi.com/impg/PI5RwUMNOxA4RDX9C-k4Kxf0GyNzuDsvE7up3Q/2zjiKkMT9Co.jpg?size=857x1080&quality=96&sign=4b0ca3ce93170c93adfdf6f1f35402c1&type=album",
+  "https://sun9-85.userapi.com/impg/ewzURAO5rBzGyDARtGOYULzkkA48XVV7QjJU6g/eiAw2ovIsGs.jpg?size=564x564&quality=96&sign=f31c516593b039ce0556c3224496948e&type=album",
+];
 
+let srcI = 0;
+function Banners() {
+  const [src, setSrc] = useState(srcList[0]);
+  useEffect(() => {
+    console.log('set')
+    setInterval(() => {
+      console.log('inside')
+      if (srcI === srcList.length - 1) {
+        srcI = 0;
+      } else {
+        srcI++;
+      }
+      setSrc(srcList[srcI]);
+    }, 4000)
+  }, []);
+  return <div className="banner-img"><img src={src} alt="" /></div>
+}
 const Home = () => {
   //useDocumentTitle('Salinaka | Home');
   useScrollTop();
@@ -45,13 +69,13 @@ const Home = () => {
               <ArrowRightOutlined />
             </Link>*/}
           </div>
-          <div className="banner-img"><img src="https://sun9-4.userapi.com/impg/c856032/v856032854/18081d/URjF9LnAhLM.jpg?size=576x768&quality=96&sign=04c3fef13b8804d9a3bd4d35d201ee10&type=album" alt="" /></div>
+          <Banners/>
         </div>
         <div className="display">
-          <div className="display-header">
-            <h1>Квесты</h1>
+          {/*<div className="display-header">*/}
+            {/*<h1>Квесты</h1>*/}
             {/*<Link to={FEATURED_PRODUCTS}>See All</Link>*/}
-          </div>
+          {/*</div>*/}
           {(errorFeatured && !isLoadingFeatured) ? (
             <MessageDisplay
               message={errorFeatured}
