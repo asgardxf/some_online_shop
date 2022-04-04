@@ -17,7 +17,7 @@ const withCheckout = (Component) => withRouter((props) => {
   console.log(state)
 
   const shippingFee = state.shipping.isInternational ? 50 : 0;
-  const subtotal = calculateTotal(state.basket.map((product) => product.price * product.quantity));
+  const subtotal = calculateTotal(state.basket.map((product) => parseInt(product.price) * (product.quantity || 1)));
 
   if (!state.isAuth) {
     //return <Redirect to={SIGNIN} />;
