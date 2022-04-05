@@ -18,10 +18,22 @@ export function apiCall(path) {
 
 
 function getProducts() {
-  return apiCall('/quest/quest_list').then(data => data.map(mapItem).filter(item => {
-      console.log(item)
-      return String(item.city) === localStorage.getItem('city');
-  }));
+  return Promise.all([
+    apiCall('/quest/quest_list'),
+    apiCall('/quest/order_list'),
+  ]).then(arr => {
+    const [quest, order] = arr;
+    return quest.map(mapItem).map(item => ({
+      ...item,
+      order_list: order.filter(o => String(o.quest) === item.id).map(o => ({...o, date: o.date.split(' ')[0], _raw_date: o.date}))
+    }))
+  }).then(d => {
+    console.log(d)
+    return d;
+  })
+  // return apiCall('/quest/quest_list').then(data => data.map(mapItem).filter(item => {
+  //     return String(item.city) === localStorage.getItem('city');
+  // }));
 }
 
 function mapItem(item) {

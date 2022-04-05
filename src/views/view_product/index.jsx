@@ -27,6 +27,8 @@ const ViewProduct = () => {
   const [selectedDate, setSelectedDate] = useState();
   const [selectedColor, setSelectedColor] = useState('');
 
+  const currentOrders = new Set(product?.order_list.filter(o => o.date === selectedDate).map(o => o.timeslot) || []);
+
   const {
     recommendedProducts,
     fetchRecommendedProducts,
@@ -136,7 +138,7 @@ const ViewProduct = () => {
                 >
                   <option value="none">Не выбрано</option>
                   {product.timeslot_list.map(item => {
-                    return <option key={item} value={item}>{item}</option>
+                    return <option key={item} value={item} disabled={currentOrders.has(item)}>{item}</option>
                   })}
                 </select>
               </div>
