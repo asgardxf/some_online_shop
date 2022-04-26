@@ -154,4 +154,6 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default function () {
+    return <div>123</div>
+};
