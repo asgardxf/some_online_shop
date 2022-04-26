@@ -88,7 +88,7 @@ const SearchBar = () => {
       try {
           return currentClient ? clients.find(item => item.contact == currentClient).cashback : 0
       } catch (e) {
-          return 'Не удалось'
+          return 0
       }
   }
 
