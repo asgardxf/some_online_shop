@@ -12,6 +12,11 @@ apiCall('/quest/city_list').then(data => {
   city = data;
 });
 
+let clients = []
+apiCall('/quest/client_list').then(json => {
+    clients = json
+})
+
 let c = localStorage.getItem('city');
 if (!c) {
     localStorage.setItem('city', '1');
@@ -77,8 +82,10 @@ const SearchBar = () => {
   const onClearRecent = () => {
     dispatch(clearRecentSearch());
   };
+  const currentClient = localStorage.getItem('client');
 
     return <div>
+      Кешбек:&nbsp; {currentClient ? clients.find(item => item.contact == currentClient).cashback : 0}&nbsp;
       Ваш город:&nbsp;
         <select defaultValue={c} onChange={event => {
             localStorage.setItem('city', event.target.value);
@@ -86,6 +93,12 @@ const SearchBar = () => {
         }}>
             {city.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
         </select>
+        {!localStorage.getItem('client') && <button onClick={() => {
+            const phone = prompt('Введите телефон');
+            console.log(phone)
+            localStorage.setItem('client', phone);
+            setSearchInput('123')
+        }}>Войти</button> }
     </div>
   return (
     <>

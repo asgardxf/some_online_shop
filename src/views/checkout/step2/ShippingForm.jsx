@@ -21,10 +21,10 @@ const ShippingForm = () => {
           </div>
           <div className="d-block checkout-field">
             <Field
-              name="email"
-              type="email"
-              label="* Почта"
-              placeholder="Введите почту"
+              name="phone"
+              type="phone"
+              label="* Телефон"
+              placeholder="Введите телефон"
               component={CustomInput}
             />
           </div>

@@ -21,9 +21,9 @@ const FormSchema = Yup.object().shape({
     .required('Full name is required.')
     .min(2, 'Full name must be at least 2 characters long.')
     .max(60, 'Full name must only be less than 60 characters.'),
-  email: Yup.string()
-    .email('Email is not valid.')
-    .required('Email is required.'),
+  // email: Yup.string()
+  //   .email('Email is not valid.')
+  //   .required('Email is required.'),
   address: Yup.string()
     .required('Shipping address is required.'),
   mobile: Yup.object()
