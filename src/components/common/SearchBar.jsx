@@ -84,8 +84,16 @@ const SearchBar = () => {
   };
   const currentClient = localStorage.getItem('client');
 
+  const getCb = function () {
+      try {
+          return currentClient ? clients.find(item => item.contact == currentClient).cashback : 0
+      } catch (e) {
+          return 'Не удалось'
+      }
+  }
+
     return <div>
-      Кешбек:&nbsp; {currentClient ? clients.find(item => item.contact == currentClient).cashback : 0}&nbsp;
+      Кешбек:&nbsp; {getCb()}&nbsp;
       Ваш город:&nbsp;
         <select defaultValue={c} onChange={event => {
             localStorage.setItem('city', event.target.value);
@@ -93,7 +101,7 @@ const SearchBar = () => {
         }}>
             {city.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
         </select>
-        {!localStorage.getItem('client') && <button onClick={() => {
+        {!currentClient && <button onClick={() => {
             const phone = prompt('Введите телефон');
             console.log(phone)
             localStorage.setItem('client', phone);
@@ -154,6 +162,4 @@ const SearchBar = () => {
   );
 };
 
-export default function () {
-    return <div>123</div>
-};
+export default SearchBar;
