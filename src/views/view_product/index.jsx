@@ -135,6 +135,7 @@ const ViewProduct = () => {
                     console.log(e)
                     setSelectedTime(e.target.value)
                   }}
+                  multiple
                 >
                   <option value="none">Не выбрано</option>
                   {product.timeslot_list.map(item => {
