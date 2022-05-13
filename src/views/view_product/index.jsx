@@ -133,7 +133,8 @@ const ViewProduct = () => {
                   value={selectedTime}
                   onChange={(e) => {
                     console.log(e)
-                    setSelectedTime(e.target.value)
+                      let value = Array.from(e.target.selectedOptions, option => option.value);
+                    setSelectedTime(value)
                   }}
                   multiple
                 >
