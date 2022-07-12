@@ -16,7 +16,6 @@ export function apiCall(path) {
   return fetch(apiHost + path).then(res => res.json());
 }
 
-
 function getProducts() {
   return Promise.all([
     apiCall('/quest/quest_list'),
@@ -29,7 +28,9 @@ function getProducts() {
     }))
   }).then(d => {
     console.log(d)
-    return d;
+    return d.filter(item => {
+           return String(item.city) === localStorage.getItem('city');
+    });
   })
   // return apiCall('/quest/quest_list').then(data => data.map(mapItem).filter(item => {
   //     return String(item.city) === localStorage.getItem('city');
