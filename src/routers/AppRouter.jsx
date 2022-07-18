@@ -23,7 +23,7 @@ const times = [
   25000,
 ];
 let select = null;
-const cert = () => {
+const Cert = () => {
 
   const { addToBasket } = useBasket();
 
