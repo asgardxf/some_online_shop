@@ -13,9 +13,9 @@ apiCall('/quest/city_list').then(data => {
 });
 
 let clients = []
-apiCall('/quest/client_list').then(json => {
-    clients = json
-})
+// apiCall('/quest/client_list').then(json => {
+//     clients = json
+// })
 
 let c = localStorage.getItem('city');
 if (!c) {
@@ -24,7 +24,6 @@ if (!c) {
 
 
 const SearchBar = () => {
-  console.log(city)
   const [searchInput, setSearchInput] = useState('');
   const { filter, isLoading } = useSelector((state) => ({
     filter: state.filter,

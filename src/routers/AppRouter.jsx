@@ -8,17 +8,68 @@ import * as view from 'views';
 import AdminRoute from './AdminRoute';
 import ClientRoute from './ClientRoute';
 import PublicRoute from './PublicRoute';
+import {useBasket} from "../hooks";
 
 // Revert back to history v4.10.0 because
 // v5.0 breaks navigation
 export const history = createBrowserHistory();
 
+const times = [
+  1500,
+  2000,
+  3000,
+  5000,
+  1000,
+  25000,
+];
+let select = null;
+const cert = () => {
+
+  const { addToBasket } = useBasket();
+
+  return <main className="content">
+    <div className="product-view">
+      Сертификат
+      <div className="product-modal">
+        <div className="product-modal-details">
+          <br />
+          <div>
+            <span className="text-subtle">Цена</span>
+            <select ref={r => {
+              select = r;
+            }}>
+              {times.map((item => {
+                return <option key={item} value={item}  style={{width: '300px'}}>{item}</option>
+              }))}
+            </select>
+          </div>
+          <div className="product-modal-action">
+            <button
+              className={`button button-small button-border`}
+              onClick={() => {
+                addToBasket({name: 'Сертификат', price: select.value, quantity: 1})
+              }}
+              type="button"
+            >
+              {'Добавить в корзину'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+}
 const AppRouter = () => (
   <Router history={history}>
     <>
       <Navigation />
       <Basket />
       <Switch>
+        <Route
+          exact
+          component={cert}
+          path={'/cert'}
+        />
         <Route
           component={view.Search}
           exact

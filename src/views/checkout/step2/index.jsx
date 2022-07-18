@@ -6,7 +6,7 @@ import { CHECKOUT_STEP_1, CHECKOUT_STEP_3 } from 'constants/routes';
 import { Form, Formik } from 'formik';
 import { useDocumentTitle, useScrollTop } from 'hooks';
 import PropType from 'prop-types';
-import React from 'react';
+import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { setShippingDetails } from 'redux/actions/checkoutActions';
@@ -131,4 +131,41 @@ ShippingDetails.propTypes = {
   }).isRequired
 };
 
-export default withCheckout(ShippingDetails);
+//export default withCheckout(ShippingDetails);
+
+
+export default (props) => {
+  useDocumentTitle('Check Out Step 2 | Salinaka');
+  useScrollTop();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const shipping = {};
+  const profile = {};
+  const initFormikValues = {
+    fullname: shipping.fullname || profile.fullname || '',
+    email: shipping.email || profile.email || '',
+    address: shipping.address || profile.address || '',
+    mobile: shipping.mobile || profile.mobile || {},
+    isInternational: shipping.isInternational || false,
+    isDone: shipping.isDone || false
+  };
+
+  const onSubmitForm = (form) => {
+
+  }
+
+  const [values, setValues] = useState({});
+
+  return (
+    //<Boundary>
+      <div className="checkout">
+        <StepTracker current={2} />
+        <div className="checkout-step-2">
+          <h3 className="text-center">Shipping Details</h3>
+          <ShippingForm values={values} setValues={setValues}/>
+        </div>
+      </div>
+    // </Boundary>
+  );
+}

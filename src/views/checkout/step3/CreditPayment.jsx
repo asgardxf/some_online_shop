@@ -70,9 +70,9 @@ const CreditPayment = () => {
             >
               <div className="d-flex-grow-1 margin-left-s">
                 <h4 className="margin-0">Credit Card</h4>
-                <span className="text-subtle d-block margin-top-s">
-                  Pay with Visa, Master Card and other debit or credit card
-                </span>
+                {/*<span className="text-subtle d-block margin-top-s">*/}
+                  {/*Pay with Visa, Master Card and other debit or credit card*/}
+                {/*</span>*/}
               </div>
               <div className="d-flex">
                 <div className="payment-img payment-img-visa" />
@@ -98,7 +98,7 @@ const CreditPayment = () => {
                 <Field
                   name="name"
                   type="text"
-                  label="* Name on Card"
+                  label="* Имя владельца"
                   placeholder="Jane Doe"
                   component={CustomInput}
                   style={{ textTransform: 'capitalize' }}
@@ -111,7 +111,7 @@ const CreditPayment = () => {
                   type="text"
                   maxLength={19}
                   onKeyDown={handleOnlyNumberInput}
-                  label="* Card Number"
+                  label="* Номер карты"
                   placeholder="Enter your card number"
                   component={CustomInput}
                 />
@@ -122,7 +122,7 @@ const CreditPayment = () => {
                 <Field
                   name="expiry"
                   type="date"
-                  label="* Expiry Date"
+                  label="* Дата"
                   placeholder="Enter your expiry date"
                   component={CustomInput}
                 />

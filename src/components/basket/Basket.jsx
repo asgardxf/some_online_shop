@@ -12,30 +12,33 @@ import { clearBasket } from 'redux/actions/basketActions';
 
 const Basket = () => {
   const { isOpenModal, onOpenModal, onCloseModal } = useModal();
-  const { basket, user } = useSelector((state) => ({
+  const { basket_, user } = useSelector((state) => ({
     basket: state.basket,
     user: state.auth
   }));
+  //console.log(basket, user)
+  const basket = window.basket;
   const history = useHistory();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const didMount = useDidMount();
 
-  useEffect(() => {
-    if (didMount && firebase.auth.currentUser && basket.length !== 0) {
-      firebase.saveBasketItems(basket, firebase.auth.currentUser.uid)
-        .then(() => {
-          console.log('Item saved to basket');
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }
-  }, [basket.length]);
+  // useEffect(() => {
+  //   if (didMount && firebase.auth.currentUser && basket.length !== 0) {
+  //     firebase.saveBasketItems(basket, firebase.auth.currentUser.uid)
+  //       .then(() => {
+  //         console.log('Item saved to basket');
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //       });
+  //   }
+  // }, [basket.length]);
 
   const onCheckOut = () => {
     if ((basket.length !== 0 && user)) {
       document.body.classList.remove('is-basket-open');
+      localStorage.setItem('basket', JSON.stringify(window.basket));
       history.push(CHECKOUT_STEP_1);
     } else {
       onOpenModal();

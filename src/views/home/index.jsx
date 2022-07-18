@@ -8,6 +8,8 @@ import {
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
+import { useHistory } from 'react-router-dom';
+
 const srcList = [
   "https://sun9-81.userapi.com/impf/c841222/v841222361/42e29/SVuaH-X5oXI.jpg?size=1080x1080&quality=96&sign=850eff2c0cc6a3ac561932ddcf0ba4e2&type=album",
   "https://sun9-61.userapi.com/impf/2rJ49OJST4uvjZ156c4S-s0Vdk0SPIbKDH23Vg/O-dcUdhhGtk.jpg?size=480x604&quality=96&sign=147c0c629e311bef571f4c1bc4512858&type=album",
@@ -50,6 +52,8 @@ const Home = () => {
     error: errorRecommended
   } = useRecommendedProducts(6);
 
+  const history = useHistory();
+
   return (
     <main className="content">
       <div className="home">
@@ -70,6 +74,17 @@ const Home = () => {
             </Link>*/}
           </div>
           <Banners/>
+        </div>
+        <div className="display">
+          <div className="product-display-grid">
+            <div className="product-display" onClick={() => {
+              history.push('/cert');
+            }}>
+              <div className="product-display-details">
+                Сертификат
+              </div>
+            </div>
+          </div>
         </div>
         <div className="display">
           {/*<div className="display-header">*/}

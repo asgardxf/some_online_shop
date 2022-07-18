@@ -10,9 +10,15 @@ const createReturn = (params, result) => {
         }
     }
 };
+
+console.log(localStorage.getItem('basket'),)
+window.basket = localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : [];
 const app = {}; //todo
 const apiHost = 'http://151.248.113.224:8000';
 export function apiCall(path) {
+  if (path.includes('client')) {
+    debugger
+  }
   return fetch(apiHost + path).then(res => res.json());
 }
 
@@ -27,7 +33,6 @@ function getProducts() {
       order_list: order.filter(o => String(o.quest) === item.id).map(o => ({...o, date: o.date.split(' ')[0], _raw_date: o.date}))
     }))
   }).then(d => {
-    console.log(d)
     return d.filter(item => {
            return String(item.city) === localStorage.getItem('city');
     });
