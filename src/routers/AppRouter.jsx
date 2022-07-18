@@ -67,7 +67,7 @@ const AppRouter = () => (
       <Switch>
         <Route
           exact
-          component={cert}
+          component={Cert}
           path={'/cert'}
         />
         <Route
