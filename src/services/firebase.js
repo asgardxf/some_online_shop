@@ -12,7 +12,8 @@ const createReturn = (params, result) => {
 };
 
 console.log(localStorage.getItem('basket'),)
-window.basket = localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : [];
+//window.basket = localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : [];
+window.basket = [];
 const app = {}; //todo
 const apiHost = 'http://151.248.113.224:8000';
 export function apiCall(path) {
