@@ -42,7 +42,7 @@ const Navigation = (props) => {
             </button>
           )}
         </BasketToggle>
-        <ul className="mobile-navigation-menu">
+        {/*<ul className="mobile-navigation-menu">
           {user ? (
             <li className="mobile-navigation-item">
               <UserNav />
@@ -62,7 +62,7 @@ const Navigation = (props) => {
               )}
             </>
           )}
-        </ul>
+        </ul>*/}
       </div>
       <div className="mobile-navigation-sec">
         <SearchBar />
