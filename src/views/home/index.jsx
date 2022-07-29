@@ -64,7 +64,7 @@ const Login = () => {
       })
       if (c) {
         localStorage.setItem('user_id', c.id)
-        location.reload();
+        document.location.reload();
       }
     }}>OK</button>
   </SomeBlock>
@@ -92,7 +92,7 @@ const Reg = () => {
         return
         }
         localStorage.setItem('user_id', res[0].id)
-        location.reload();
+        document.location.reload();
       })
     }}>OK</button>
   </SomeBlock>
