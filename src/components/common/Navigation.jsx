@@ -87,7 +87,7 @@ const Navigation = () => {
         </FiltersToggle>
       )}
       <SearchBar />
-      <ul className="navigation-menu">
+      {/*<ul className="navigation-menu">
         <li className="navigation-menu-item">
           <BasketToggle>
             {({ onClickToggle }) => (
@@ -131,7 +131,7 @@ const Navigation = () => {
             )}
           </li>
         )}
-      </ul>
+      </ul>*/}
     </nav>
   );
 };

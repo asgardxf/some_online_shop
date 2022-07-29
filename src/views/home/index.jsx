@@ -1,5 +1,5 @@
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { MessageDisplay } from 'components/common';
+import { MessageDisplay, Fields } from 'components/common';
 import { ProductShowcaseGrid } from 'components/product';
 import { FEATURED_PRODUCTS, RECOMMENDED_PRODUCTS, SHOP } from 'constants/routes';
 import {
@@ -7,9 +7,11 @@ import {
 } from 'hooks';
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import { apiCall, toUrlParams } from 'services/firebase';
 
 import { useHistory } from 'react-router-dom';
 
+const Input = Fields.TextFieldWrapped;
 const srcList = [
   "https://sun9-81.userapi.com/impf/c841222/v841222361/42e29/SVuaH-X5oXI.jpg?size=1080x1080&quality=96&sign=850eff2c0cc6a3ac561932ddcf0ba4e2&type=album",
   "https://sun9-61.userapi.com/impf/2rJ49OJST4uvjZ156c4S-s0Vdk0SPIbKDH23Vg/O-dcUdhhGtk.jpg?size=480x604&quality=96&sign=147c0c629e311bef571f4c1bc4512858&type=album",
@@ -18,6 +20,83 @@ const srcList = [
   "https://sun9-85.userapi.com/impg/ewzURAO5rBzGyDARtGOYULzkkA48XVV7QjJU6g/eiAw2ovIsGs.jpg?size=564x564&quality=96&sign=f31c516593b039ce0556c3224496948e&type=album",
 ];
 
+
+const SomeBlock = (props) => {
+  return <div className="display">
+    <div className="product-display-grid">
+      <div className="product-display" onClick={() => {
+
+      }}>
+        <div className="product-display-details">
+          {props.children}
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+
+let user_id = localStorage.getItem('user_id');
+
+window.apiCall = apiCall
+
+
+let clients = []
+apiCall('/quest/client_list').then(json => {
+    clients = json
+})
+
+let login2='';
+let pw='';
+const Login = () => {
+  if (user_id) {
+    return null;
+  }
+  return <SomeBlock>
+    Логин
+    <br/>
+    Телефон: <Input onChange={(v) => {login2=v}}/>
+    <br/>
+    Пароль: <Input onChange={(v) => {pw=v}}/>
+    <button onClick={() => {
+      const c =clients.find(item => {
+      return item.contact == login2 && item.pw == pw;
+      })
+      if (c) {
+        localStorage.setItem('user_id', c.id)
+        location.reload();
+      }
+    }}>OK</button>
+  </SomeBlock>
+}
+
+
+let email = '';
+let contact = '';
+let password = '';
+const Reg = () => {
+  if (user_id) {
+    return null;
+  }
+  return <SomeBlock>
+    Регистрация
+    Телефон: <Input onChange={(v) => {
+      contact = v;
+    }}/>
+    <br/>
+    Пароль: <Input onChange={(v) => {password=v}}/>
+    Почта: <Input onChange={(v) => {email=v}}/>
+    <button onClick={() => {
+      apiCall('/quest/create_client' + toUrlParams({password, contact, email})).then((res) => {
+        if (res.error) {
+        return
+        }
+        localStorage.setItem('user_id', res[0].id)
+        location.reload();
+      })
+    }}>OK</button>
+  </SomeBlock>
+}
 let srcI = 0;
 function Banners() {
   const [src, setSrc] = useState(srcList[0]);
@@ -75,6 +154,8 @@ const Home = () => {
           </div>
           <Banners/>
         </div>
+        <Login/>
+        <Reg/>
         <div className="display">
           <div className="product-display-grid">
             <div className="product-display" onClick={() => {

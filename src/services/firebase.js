@@ -16,11 +16,28 @@ console.log(localStorage.getItem('basket'),)
 window.basket = [];
 const app = {}; //todo
 const apiHost = 'http://151.248.113.224:8000';
-export function apiCall(path) {
-  if (path.includes('client')) {
-    debugger
-  }
-  return fetch(apiHost + path).then(res => res.json());
+export function apiCall(path, args) {
+  // if (path.includes('client')) {
+  //   debugger
+  // }
+  return fetch(apiHost + path, args).then(res => res.json());
+}
+
+const isObject = (it) => it != null && typeof it === 'object';
+export function toUrlParams(data) {
+  console.log(data)
+  let value;
+  if (!data) return '';
+  const serialized = [];
+  Object.keys(data).forEach((key) => {
+    value = data[key];
+    if (value === undefined) return; // continue;
+    if (typeof value === 'function') return;
+    if (isObject(value)) value = JSON.stringify(value);
+    // key and value should be decoded with decodeURIComponent
+    serialized.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+  });
+  return `?${serialized.join('&')}`;
 }
 
 function getProducts() {
