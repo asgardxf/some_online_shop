@@ -105,7 +105,7 @@ const ViewProduct = () => {
                 src={selectedImage}
               />
             </div>
-            <div className="product-modal-details">
+            {!product.blocked && <div className="product-modal-details">
               <br />
               <span className="text-subtle">{product.brand}</span>
               <h1 className="margin-top-0">{product.name}</h1>
@@ -179,7 +179,7 @@ const ViewProduct = () => {
                   {isItemOnBasket(product.id) ? 'Удалить из корзины' : 'Добавить в корзину'}
                 </button>
               </div>
-            </div>
+            </div>}
           </div>
           {/*<div style={{ marginTop: '10rem' }}>
             <div className="display-header">
