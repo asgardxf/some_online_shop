@@ -46,10 +46,12 @@ function getProducts() {
     apiCall('/quest/order_list'),
   ]).then(arr => {
     const [quest, order] = arr;
-    return quest.map(mapItem).map(item => ({
+    const result = quest.map(mapItem).map(item => ({
       ...item,
       order_list: order.filter(o => String(o.quest) === item.id).map(o => ({...o, date: o.date.split(' ')[0], _raw_date: o.date}))
-    }))
+    })).sort((a, b) => b.position - a.position);
+    console.log(result)
+    return result
   }).then(d => {
     return d.filter(item => {
            return String(item.city) === localStorage.getItem('city');

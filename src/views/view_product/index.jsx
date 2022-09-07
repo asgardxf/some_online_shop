@@ -14,6 +14,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Select from 'react-select';
 
+const today = new Date().toISOString().slice(0, 10);
 const ViewProduct = () => {
   const { id } = useParams();
   const { product, isLoading, error } = useProduct(id);
@@ -155,6 +156,7 @@ const ViewProduct = () => {
                     setSelectedDate(e.target.value)
                   }}
                   type="date"
+                  min={today}
                 />
               </div>
               <br />
