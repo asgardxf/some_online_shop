@@ -23,6 +23,14 @@ export function apiCall(path, args) {
   return fetch(apiHost + path, args).then(res => res.json());
 }
 
+export const globalState = {
+  client_list: [],
+};
+
+apiCall('/quest/client_list').then(json => {
+  globalState.client_list = json;
+})
+
 const isObject = (it) => it != null && typeof it === 'object';
 export function toUrlParams(data) {
   console.log(data)
@@ -50,7 +58,7 @@ function getProducts() {
       ...item,
       order_list: order.filter(o => String(o.quest) === item.id).map(o => ({...o, date: o.date.split(' ')[0], _raw_date: o.date}))
     })).sort((a, b) => b.position - a.position);
-    console.log(result)
+    //console.log(result)
     return result
   }).then(d => {
     return d.filter(item => {

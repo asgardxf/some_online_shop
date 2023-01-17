@@ -7,6 +7,7 @@ import UserNav from 'views/account/components/UserAvatar';
 import Badge from './Badge';
 import FiltersToggle from './FiltersToggle';
 import SearchBar from './SearchBar';
+import { globalState } from 'services/firebase';
 
 const Navigation = (props) => {
   const {
@@ -23,7 +24,9 @@ const Navigation = (props) => {
       <div className="mobile-navigation-main">
         <div className="mobile-navigation-logo">
           <Link onClick={onClickLink} to={HOME}>
-            <h2>AллоПалыч</h2>
+            <h2 style={{display: 'inline-block'}}>AллоПалыч</h2>
+            &nbsp;<span style={{fontSize: '20px'}}>нас уже {5500 + globalState.client_list.length}</span>
+
           </Link>
         </div>
 
