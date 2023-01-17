@@ -56,7 +56,7 @@ const Navigation = () => {
 
   if (store.user && store.user.role === 'ADMIN') {
     return null;
-  } if (window.screen.width <= 800) {
+  } if (true) {
     return (
       <MobileNavigation
         // eslint-disable-next-line react/jsx-props-no-spreading
