@@ -57,6 +57,8 @@ const Basket = () => {
     }
   };
 
+  console.log('OLOLO')
+  console.log(basket)
   return user && user.role === 'ADMIN' ? null : (
     <Boundary>
       <Modal
@@ -134,7 +136,7 @@ const Basket = () => {
             <p className="basket-total-title">Subtotal Amout:</p>
             <h2 className="basket-total-amount">
               {/*{displayMoney(calculateTotal(basket.map((product) => product.price * product.quantity)))}*/}
-              {displayMoney(calculateTotal(basket.map((product) => parseInt(product.price))))}
+              {displayMoney(calculateTotal(basket.map((product) => parseInt(product.price) * product.selectedTime.length)))}
             </h2>
           </div>
           <button

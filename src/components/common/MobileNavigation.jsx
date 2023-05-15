@@ -25,11 +25,9 @@ const Navigation = (props) => {
         <div className="mobile-navigation-logo">
           <Link onClick={onClickLink} to={HOME}>
             <h2 style={{display: 'inline-block'}}>AллоПалыч</h2>
-            &nbsp;<span style={{fontSize: '20px'}}>нас уже {5500 + globalState.client_list.length}</span>
-
           </Link>
         </div>
-
+        <span style={{fontSize: '20px'}}>нас уже {5500 + globalState.client_list.length}</span>
         <BasketToggle>
           {({ onClickToggle }) => (
             <button

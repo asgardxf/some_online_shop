@@ -57,7 +57,7 @@ const ViewProduct = () => {
     if (selectedTime === 'none' || !selectedDate) {
       return
     }
-    addToBasket({ ...product, selectedColor, selectedSize: selectedSize || product.sizes[0] });
+    addToBasket({ ...product, selectedColor, selectedSize: selectedSize || product.sizes[0], selectedTime});
   };
 
   return (
